@@ -18,11 +18,27 @@ class TicTacToe {
           }
         
           isFinished() {
-        
+              if( this.getWinner()!== null || this.isDraw() === true ) return true;
+        return false;
           }
         
           getWinner() {
-        
+           for(let i = 0 , length = this.gameField.length; i < length; i++){
+               let center = 1;
+if(this.gameField[i][center] === this.gameField[i][center-1] &&  this.gameField[i][center] === this.gameField[i][center+1] && this.gameField[i][center]!== null){
+    return this.gameField[i][center];
+}
+if(this.gameField[center-1][i] === this.gameField[center][i] && this.gameField[center][i] === this.gameField[center+1][i] && this.gameField[center][i] !== null) return this.gameField[center][i];
+           }
+
+           if(this.gameField[1][1] === this.gameField[0][0] && this.gameField[1][1] === this.gameField[2][2] && this.gameField[1][1] !== null){
+               return this.gameField[1][1];
+           };
+           if(this.gameField[1][1] === this.gameField[0][2] && this.gameField[2][0] === this.gameField[1][1] && this.gameField[1][1] !== null){
+               return this.gameField[1][1];
+           }
+          return null;
+           
           }
         
           noMoreTurns() {
@@ -34,7 +50,9 @@ class TicTacToe {
               }
         
           isDraw() {
-        
+              let winner  ;
+              this.getWinner() === null? winner = true : false;
+        return !!(this.noMoreTurns() && winner );
           }
         
           getFieldValue(rowIndex, colIndex) {
